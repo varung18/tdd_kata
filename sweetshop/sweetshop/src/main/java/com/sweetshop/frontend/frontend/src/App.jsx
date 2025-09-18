@@ -1,14 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import React from "react";
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
 
 function App() {
     const token = localStorage.getItem("token");
 
 
   return (
-    <Router>
+    <BrowserRouter>
           <Routes>
             {/* Public routes */}
             <Route path="/login" element={<Login />} />
@@ -17,13 +19,13 @@ function App() {
             {/* Protected route */}
             <Route
               path="/dashboard"
-              element={token ? <Dashboard /> : <Navigate to="/login" />}
+              element={token ? <Dashboard /> : <Navigate to="/login" replace/>}
             />
 
             {/* Default redirect */}
-            <Route path="*" element={<Navigate to="/login" />} />
+            <Route path="*" element={<Navigate to="/login" replace/>} />
           </Routes>
-        </Router>
+        </BrowserRouter>
   )
 }
 
