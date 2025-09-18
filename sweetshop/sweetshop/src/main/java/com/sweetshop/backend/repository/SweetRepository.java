@@ -1,6 +1,6 @@
-package com.sweetshop.repository;
+package com.sweetshop.backend.repository;
 
-import com.sweetshop.model.Sweet;
+import com.sweetshop.backend.model.Sweet;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;

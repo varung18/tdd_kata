@@ -1,6 +1,7 @@
-package com.sweetshop.model;
+package com.sweetshop.backend.model;
 
 import lombok.Data;
+import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,5 +15,10 @@ public class Sweet {
     private double price;
     private int quantity;
 
+    //Media
+    private Binary photo;
+    private Binary video;
+
     //using a spring plugin lombok to reduce boilerplate for getters and setters
+
 }

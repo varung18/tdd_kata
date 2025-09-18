@@ -1,4 +1,4 @@
-package com.sweetshop.model;
+package com.sweetshop.backend.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "users")
 @Data
 public class User {
-    @org.springframework.data.annotation.Id
+    @Id
     private String Id;
     private String username;
     private String password;
