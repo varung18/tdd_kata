@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface SweetRepository extends MongoRepository<Sweet, String> {
     List<Sweet> findByNameContainingIgnoreCase(String name);
-    List<Sweet> findByCategoryIgnoreCase(String category);
+    List<Sweet> findByCategoryContainingIgnoreCase(String category);
     List<Sweet> findByPriceBetween(double min, double max);
+    List<Sweet> findByPriceGreaterThanEqual(double minPrice);
+    List<Sweet> findByPriceLessThanEqual(double maxPrice);
 }
