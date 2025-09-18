@@ -34,8 +34,8 @@ function Dashboard() {
           <div key={sweet.id} style={{ border: "1px solid #ccc", padding: "1rem" }}>
             <h3>{sweet.name}</h3>
             <p>Category: {sweet.category}</p>
-            <p>Price: ${sweet.price}</p>
-            <p>Stock: {sweet.stock}</p>
+            <p>Price: INR. {sweet.price}</p>
+            <p>Quantity: {sweet.quantity}</p>
             <button disabled={sweet.stock === 0}>Purchase</button>
           </div>
         ))}
