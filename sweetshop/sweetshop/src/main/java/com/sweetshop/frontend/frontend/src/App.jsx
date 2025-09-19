@@ -1,20 +1,32 @@
+import './App.css'
 import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Auth from "./pages/Auth.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Dashboard from './pages/Dashboard';
 
 function App() {
-  const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
+
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Auth />} />          {/* Combined Login/Register */}
-        <Route path="/dashboard" element={token ? <Dashboard /> : <Navigate to="/" />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </BrowserRouter>
-  );
+          <Routes>
+            {/* Public routes */}
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+
+            {/* Protected route */}
+            <Route
+              path="/dashboard"
+              element={token ? <Dashboard /> : <Navigate to="/login" replace/>}
+            />
+
+            {/* Default redirect */}
+            <Route path="*" element={<Navigate to="/login" replace/>} />
+          </Routes>
+        </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
