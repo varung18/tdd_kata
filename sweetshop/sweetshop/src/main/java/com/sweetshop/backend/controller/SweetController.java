@@ -3,7 +3,6 @@ package com.sweetshop.backend.controller;
 
 import com.sweetshop.backend.model.Sweet;
 import com.sweetshop.backend.service.SweetService;
-import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -40,11 +39,11 @@ public class SweetController {
         sweet.setQuantity(quantity);
 
         if (photo != null) {
-            sweet.setPhoto(new org.bson.types.Binary(photo.getBytes()));
+            sweet.setPhoto(new Binary(photo.getBytes()));
         }
 
         if (video != null) {
-            sweet.setVideo(new org.bson.types.Binary(video.getBytes()));
+            sweet.setVideo(new Binary(video.getBytes()));
         }
 
         return ResponseEntity.ok(sweetService.addSweet(sweet));
@@ -94,9 +93,24 @@ public class SweetController {
     }
 
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Sweet> updateSweet(@PathVariable String id, @RequestBody Sweet sweet) {
-        return ResponseEntity.ok(sweetService.updateSweet(id, sweet));
+    @PutMapping(value = "/{id}", consumes = {"multipart/form-data"})
+    public ResponseEntity<Sweet> updateSweet(
+            @PathVariable String id,
+            @RequestParam(value = "name", required = false) String name,
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "price", required = false) Double price,
+            @RequestParam(value = "quantity", required = false) Integer quantity,
+            @RequestPart(value = "photo", required = false) MultipartFile photo,
+            @RequestPart(value = "video", required = false) MultipartFile video
+    ) {
+        Sweet updatedSweet = new Sweet();
+        updatedSweet.setName(name);
+        updatedSweet.setCategory(category);
+        updatedSweet.setPrice(price);
+        updatedSweet.setQuantity(quantity);
+
+        Sweet updated = sweetService.updateSweet(id, updatedSweet, photo, video);
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")

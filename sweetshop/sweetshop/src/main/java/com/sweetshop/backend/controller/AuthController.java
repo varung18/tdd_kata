@@ -42,11 +42,21 @@ public class AuthController {
                     new UsernamePasswordAuthenticationToken(body.get("username"), body.get("password"))
             );
 
-            String token = jwtUtil.generateToken(auth.getName(),
-                    auth.getAuthorities().iterator().next().getAuthority());
+            // Extract username
+            String username = auth.getName();
 
-            return Map.of("token", token);
-        } catch (AuthenticationException e){
+            // Extract role (first authority)
+            String role = auth.getAuthorities().iterator().next().getAuthority();
+
+            // Generate JWT with username + role
+            String token = jwtUtil.generateToken(username, role);
+
+            // Return both token and role
+            return Map.of(
+                    "token", token,
+                    "role", role
+            );
+        } catch (AuthenticationException e) {
             return Map.of("error", "Invalid username or password");
         }
     }

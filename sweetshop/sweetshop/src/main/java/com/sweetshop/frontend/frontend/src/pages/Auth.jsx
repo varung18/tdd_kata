@@ -17,6 +17,7 @@ const Auth = () => {
         // Login API
         const res = await axios.post("http://localhost:8080/api/auth/login", { username, password });
         localStorage.setItem("token", res.data.token);
+        localStorage.setItem("role", res.data.role);
         navigate("/dashboard");
       } else {
         // Register API
