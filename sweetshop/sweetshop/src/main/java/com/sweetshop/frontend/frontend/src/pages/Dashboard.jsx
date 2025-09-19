@@ -25,9 +25,78 @@ const SearchIcon = (props) => (
 );
 const SyncIcon = (props) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16" fill="currentColor" {...props}>
-    <path d="M472 232c-6.6 0-12 5.4-12 12s5.4 12 12 12c40.8 0 74.3 33.5 74.3 74.3c0 40.8-33.5 74.3-74.3 74.3c-24.4 0-46.7-12-61.6-31.5-3.3-4.3-9.5-5.2-14.1-2l-40.8 30.6c-4.6 3.4-6.3 9.7-3.9 15c26.9 59.9 89.2 100 160.4 100C491 480 544 427 544 360c0-67-53-120-120-120zM208 280c-4.4 0-8-3.6-8-8V88c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v184c0 4.4-3.6 8-8 8h-48zM186.2 368c-1.2 0-2.4-.2-3.6-.5c-4.9-1.2-8.3-6.2-7.1-11.1l11.1-45.2c1.2-4.9 6.2-8.3 11.1-7.1l45.2 11.1c4.9 1.2 8.3 6.2 7.1 11.1l-11.1 45.2c-1.2 4.9-6.2 8.3-11.1 7.1L186.2 368zM312 360c-4.4 0-8-3.6-8-8V152c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v200c0 4.4-3.6 8-8 8h-48zM128 360c-4.4 0-8-3.6-8-8V152c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v200c0 4.4-3.6 8-8 8h-48zM40 280c-4.4 0-8-3.6-8-8V88c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v184c0 4.4 3.6 8-8 8h-48zM240 104c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v184c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V104zM368 104c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v184c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V104zM496 104c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v184c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V104zM24 240c-4.4 0-8-3.6-8-8V88c0-4.4 3.6-8 8-8H40c-4.4 0-8 3.6-8 8v152c0 4.4 3.6 8 8 8h-48c-4.4 0-8 3.6-8 8v-152z"/>
+    <path d="M472 232c-6.6 0-12 5.4-12 12s5.4 12 12 12c40.8 0 74.3 33.5 74.3 74.3c0 40.8-33.5 74.3-74.3 74.3c-24.4 0-46.7-12-61.6-31.5-3.3-4.3-9.5-5.2-14.1-2l-40.8 30.6c-4.6 3.4-6.3 9.7-3.9 15c26.9 59.9 89.2 100 160.4 100C491 480 544 427 544 360c0-67-53-120-120-120zM208 280c-4.4 0-8-3.6-8-8V88c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v184c0 4.4-3.6 8-8 8h-48zM186.2 368c-1.2 0-2.4-.2-3.6-.5c-4.9-1.2-8.3-6.2-7.1-11.1l11.1-45.2c1.2-4.9 6.2-8.3 11.1-7.1l45.2 11.1c4.9 1.2 8.3 6.2 7.1 11.1l-11.1 45.2c-1.2 4.9-6.2 8.3-11.1 7.1L186.2 368zM312 360c-4.4 0-8-3.6-8-8V152c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v200c0 4.4-3.6 8-8 8h-48zM128 360c-4.4 0-8-3.6-8-8V152c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v200c0 4.4 3.6 8-8 8h-48zM40 280c-4.4 0-8-3.6-8-8V88c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v184c0 4.4 3.6 8-8 8h-48zM240 104c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v184c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V104zM368 104c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v184c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V104zM496 104c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v184c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V104zM24 240c-4.4 0-8-3.6-8-8V88c0-4.4 3.6-8 8-8H40c-4.4 0-8 3.6-8 8v152c0 4.4 3.6 8 8 8h-48c-4.4 0-8 3.6-8 8v-152z"/>
   </svg>
 );
+
+// New component for a single sweet card
+const SweetCard = ({ sweet, isAdmin, mediaUrls, handlePurchase, setEditSweet, handleDeleteSweet, handleRestockSweet }) => {
+  const [isHovering, setIsHovering] = useState(false);
+
+  return (
+    <div
+      className="sweet-card"
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
+      <div className="media-container group">
+        <div className="sweet-media-wrapper">
+          {mediaUrls[sweet.id]?.photo ? (
+            <img
+              src={mediaUrls[sweet.id].photo}
+              alt={sweet.name}
+              className={`sweet-image ${isHovering && mediaUrls[sweet.id]?.video ? 'opacity-0' : 'opacity-100'}`}
+            />
+          ) : (
+            <span style={{ color: '#999', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1 }}>No media available</span>
+          )}
+          {isHovering && mediaUrls[sweet.id]?.video && (
+            <video
+              autoPlay
+              preload="auto"
+              muted
+              loop
+              playsInline
+              className="sweet-video"
+            >
+              <source src={mediaUrls[sweet.id].video} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          )}
+        </div>
+      </div>
+
+      <h3>{sweet.name}</h3>
+      <p>Category: <span>{sweet.category}</span></p>
+      <p>Price: <span>₹{sweet.price}</span></p>
+      <p>Quantity: <span>{sweet.quantity}</span></p>
+
+      <div className="actions-container">
+        <button
+          onClick={() => handlePurchase(sweet.id)}
+          disabled={sweet.quantity === 0}
+          className="action-btn purchase-btn"
+        >
+          {sweet.quantity === 0 ? "Out of Stock" : "Purchase"}
+        </button>
+        {isAdmin && (
+          <>
+            <button onClick={() => setEditSweet(sweet)} className="action-btn edit-btn">
+              <EditIcon /> Edit
+            </button>
+            <button onClick={() => handleDeleteSweet(sweet.id)} className="action-btn delete-btn">
+              <TrashIcon /> Delete
+            </button>
+            <button onClick={() => handleRestockSweet(sweet.id)} className="action-btn restock-btn">
+              <PlusIcon /> Restock
+            </button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
+
 
 function Dashboard() {
   const [sweets, setSweets] = useState([]);
@@ -532,24 +601,35 @@ function Dashboard() {
         }
 
         .media-container {
+          position: relative;
+          width: 100%;
+          min-height: 180px;
           margin-bottom: 15px;
           border-radius: 8px;
           overflow: hidden;
-          position: relative;
           background-color: #f0f0f0;
-          min-height: 180px;
           display: flex;
           align-items: center;
           justify-content: center;
         }
-
+        
+        /* Styles for the image and video within the container */
+        .sweet-media-wrapper {
+          position: relative;
+          width: 100%;
+          padding-top: 100%; /* Creates a 1:1 aspect ratio container */
+        }
+        
         .sweet-image, .sweet-video {
+          position: absolute;
+          top: 0;
+          left: 0;
           width: 100%;
           height: 100%;
           object-fit: cover;
-          display: block;
+          transition: opacity 0.3s ease-in-out;
         }
-
+        
         .actions-container {
           display: flex;
           flex-wrap: wrap;
@@ -763,10 +843,10 @@ function Dashboard() {
           </p>
         ) : (
           sweets.map((sweet) => (
-            <div key={sweet.id} className="sweet-card">
+            <React.Fragment key={sweet.id}>
               {editSweet?.id === sweet.id ? (
                 // Edit form section
-                <>
+                <div className="sweet-card">
                   <h3>Edit Sweet</h3>
                   <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                     <div className="form-field">
@@ -879,53 +959,19 @@ function Dashboard() {
                       </button>
                     </div>
                   </div>
-                </>
+                </div>
               ) : (
-                // Display card section
-                <>
-                  <div className="media-container">
-                    {mediaUrls[sweet.id]?.photo ? (
-                      <img src={mediaUrls[sweet.id].photo} alt={sweet.name} className="sweet-image" />
-                    ) : mediaUrls[sweet.id]?.video ? (
-                      <video controls className="sweet-video">
-                        <source src={mediaUrls[sweet.id].video} type="video/mp4" />
-                        Your browser does not support the video tag.
-                      </video>
-                    ) : (
-                      <span style={{ color: "#999" }}>No media available</span>
-                    )}
-                  </div>
-
-                  <h3>{sweet.name}</h3>
-                  <p>Category: <span>{sweet.category}</span></p>
-                  <p>Price: <span>₹{sweet.price}</span></p>
-                  <p>Quantity: <span>{sweet.quantity}</span></p>
-
-                  <div className="actions-container">
-                    <button
-                      onClick={() => handlePurchase(sweet.id)}
-                      disabled={sweet.quantity === 0}
-                      className="action-btn purchase-btn"
-                    >
-                      {sweet.quantity === 0 ? "Out of Stock" : "Purchase"}
-                    </button>
-                    {isAdmin && (
-                      <>
-                        <button onClick={() => setEditSweet(sweet)} className="action-btn edit-btn">
-                          <EditIcon /> Edit
-                        </button>
-                        <button onClick={() => handleDeleteSweet(sweet.id)} className="action-btn delete-btn">
-                          <TrashIcon /> Delete
-                        </button>
-                        <button onClick={() => handleRestockSweet(sweet.id)} className="action-btn restock-btn">
-                          <PlusIcon /> Restock
-                        </button>
-                      </>
-                    )}
-                  </div>
-                </>
+                <SweetCard 
+                  sweet={sweet} 
+                  isAdmin={isAdmin} 
+                  mediaUrls={mediaUrls} 
+                  handlePurchase={handlePurchase} 
+                  setEditSweet={setEditSweet}
+                  handleDeleteSweet={handleDeleteSweet}
+                  handleRestockSweet={handleRestockSweet}
+                />
               )}
-            </div>
+            </React.Fragment>
           ))
         )}
       </main>

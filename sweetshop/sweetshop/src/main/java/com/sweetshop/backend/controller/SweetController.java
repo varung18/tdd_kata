@@ -88,7 +88,7 @@ public class SweetController {
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + sweet.getName() + "_video\"")
-                .contentType(MediaType.APPLICATION_OCTET_STREAM) // video file
+                .contentType(MediaType.valueOf("video/mp4")) // video file
                 .body(sweet.getVideo().getData());
     }
 
