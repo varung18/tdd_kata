@@ -345,6 +345,13 @@ function Dashboard() {
           padding: 0;
         }
 
+        body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
         .dashboard-container {
           padding: 40px;
           max-width: 1200px;
@@ -382,16 +389,16 @@ function Dashboard() {
         }
 
         .logout-btn {
-          display: block;
-          margin: 0 auto 30px;
-          padding: 10px 20px;
-          background-color: #f44336;
-          color: white;
-          border: none;
-          border-radius: 25px;
-          font-weight: bold;
-          cursor: pointer;
-          transition: transform 0.2s ease, box-shadow 0.2s ease;
+           /* Set a fixed size and style */
+  padding: 12px 24px;
+  font-size: 16px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .logout-btn:hover {
@@ -401,6 +408,7 @@ function Dashboard() {
         
         .forms-container {
           display: flex;
+          flex-wrap: wrap;
           justify-content: space-between;
           align-items: flex-start;
           margin-bottom: 30px;
@@ -411,8 +419,9 @@ function Dashboard() {
           background-color: #fff;
           padding: 25px;
           border-radius: 12px;
-          box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-          flex: 1;
+          border: 1px solid #ffccd9;
+  flex: 1 1 45%; /* Allows sections to grow and shrink */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
           position: relative;
         }
 
@@ -455,6 +464,8 @@ function Dashboard() {
           box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
           z-index: 10;
           animation: fadeIn 0.5s ease-in-out;
+          flex-direction: column;
+  gap: 15px;
         }
 
         .add-sweet-form {
@@ -706,133 +717,182 @@ function Dashboard() {
           font-weight: 600;
           color: #555;
         }
+
+        .ribbon-container {
+        box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fce4ec; /* Light pink */
+  padding: 20px ;
+  border-radius: 15px; /* Rounded corners for a softer feel */
+  display: flex;
+  flex-direction: column; /* Stacks the header and forms container vertically */
+  gap: 20px 50px;
+  width: 100%;
+
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+        header {
+  display: flex;
+  justify-content: space-between; /* Aligns title to left, button to right */
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #ff80ab; /* A sweet divider line */
+}
+
+header h2 {
+  margin: 0;
+  color: #d81b60; /* Dark pink for a pop */
+}
+
+        
       `}</style>
-      <header>
-        <h2>🍬 Sweet Shop Dashboard 🍭</h2>
-        <button onClick={() => {
-          localStorage.removeItem("token");
-          localStorage.removeItem("role");
-          navigate("/");
-        }} className="logout-btn">
-          Logout
+      <div class="ribbon-container">
+  <header>
+    <h2>🍬 Sweet Shop Dashboard 🍭</h2>
+    <button
+      onClick={() => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("role");
+        navigate("/");
+      }}
+      className="logout-btn"
+    >
+      Login / Register
+    </button>
+  </header>
+
+  <div class="forms-container">
+    <section class="form-section">
+      <div class="search-bar-container">
+        <input
+          type="text"
+          name="name"
+          placeholder="Search by name"
+          value={filters.name}
+          onChange={handleFilterChange}
+          onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSearch();
+    }
+  }}
+        />
+        <button
+          class="form-toggle-btn search"
+          onClick={() => setShowFilterForm(!showFilterForm)}
+        >
+          <SearchIcon /> {showFilterForm ? "Hide Filters" : "Filter"}
         </button>
-      </header>
-      
-      <div className="forms-container">
-        <section className="form-section">
-          <div className="search-bar-container">
+      </div>
+      {showFilterForm && (
+        <div class="search-form-expanded">
+          <div class="form-grid">
             <input
-              type="text"
-              name="name"
-              placeholder="Search by name"
-              value={filters.name}
+              type="number"
+              name="minPrice"
+              placeholder="Min Price"
+              value={filters.minPrice}
               onChange={handleFilterChange}
             />
+            <input
+              type="number"
+              name="maxPrice"
+              placeholder="Max Price"
+              value={filters.maxPrice}
+              onChange={handleFilterChange}
+            />
+            <input
+              type="text"
+              name="category"
+              placeholder="Category"
+              value={filters.category}
+              onChange={handleFilterChange}
+            />
+          </div>
+          <div style={{ display: "flex", gap: "10px", marginTop: "15px" }}>
+            <button onClick={handleSearch} class="search-btn">
+              <SearchIcon /> Search
+            </button>
             <button
-              className="form-toggle-btn search"
-              onClick={() => setShowFilterForm(!showFilterForm)}
+              onClick={() => {
+                setFilters({ minPrice: "", maxPrice: "", category: "", name: "" });
+                fetchSweets(); // reset to all sweets
+              }}
+              class="reset-btn"
             >
-              <SearchIcon /> {showFilterForm ? "Hide Filters" : "Filter"}
+              <SyncIcon /> Reset
             </button>
           </div>
-          {showFilterForm && (
-            <div className="search-form-expanded">
-              <div className="form-grid">
-                <input
-                  type="number"
-                  name="minPrice"
-                  placeholder="Min Price"
-                  value={filters.minPrice}
-                  onChange={handleFilterChange}
-                />
-                <input
-                  type="number"
-                  name="maxPrice"
-                  placeholder="Max Price"
-                  value={filters.maxPrice}
-                  onChange={handleFilterChange}
-                />
-                <input
-                  type="text"
-                  name="category"
-                  placeholder="Category"
-                  value={filters.category}
-                  onChange={handleFilterChange}
-                />
-              </div>
-              <div style={{ display: "flex", gap: "10px", marginTop: "15px" }}>
-                <button onClick={handleSearch} className="search-btn">
-                  <SearchIcon /> Search
-                </button>
-                <button
-                  onClick={() => {
-                    setFilters({ minPrice: "", maxPrice: "", category: "", name: "" });
-                    fetchSweets(); // reset to all sweets
-                  }}
-                  className="reset-btn"
-                >
-                  <SyncIcon /> Reset
-                </button>
-              </div>
-            </div>
-          )}
-        </section>
+        </div>
+      )}
+    </section>
 
-        {isAdmin && (
-          <section className="form-section">
-            <button className="form-toggle-btn" onClick={() => setShowAddForm(!showAddForm)}>
-              <PlusIcon /> {showAddForm ? "Hide Add Sweet Form" : "Add New Sweet"}
-            </button>
-            {showAddForm && (
-              <div className="add-sweet-form">
-                <div className="form-grid">
-                  <input
-                    placeholder="Name"
-                    value={newSweet.name}
-                    onChange={(e) => setNewSweet({ ...newSweet, name: e.target.value })}
-                  />
-                  <input
-                    placeholder="Category"
-                    value={newSweet.category}
-                    onChange={(e) => setNewSweet({ ...newSweet, category: e.target.value })}
-                  />
-                  <input
-                    type="number"
-                    placeholder="Price"
-                    value={newSweet.price}
-                    onChange={(e) => setNewSweet({ ...newSweet, price: e.target.value })}
-                  />
-                  <input
-                    type="number"
-                    placeholder="Quantity"
-                    value={newSweet.quantity}
-                    onChange={(e) => setNewSweet({ ...newSweet, quantity: e.target.value })}
-                  />
-                  <div className="add-sweet-photo">
-                    <span>📷 Photo</span>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) => setNewSweet({ ...newSweet, photo: e.target.files[0] })}
-                    />
-                  </div>
-                  <div className="add-sweet-video">
-                    <span>🎥 Video</span>
-                    <input
-                      type="file"
-                      accept="video/*"
-                      onChange={(e) => setNewSweet({ ...newSweet, video: e.target.files[0] })}
-                    />
-                  </div>
-                  <button onClick={handleAddSweet} className="add-btn">
-                    <PlusIcon /> Add Sweet
-                  </button>
-                </div>
+    {isAdmin && (
+      <section class="form-section">
+        <button
+          class="form-toggle-btn"
+          onClick={() => setShowAddForm(!showAddForm)}
+        >
+          <PlusIcon /> {showAddForm ? "Hide Add Sweet Form" : "Add New Sweet"}
+        </button>
+        {showAddForm && (
+          <div class="add-sweet-form">
+            <div class="form-grid">
+              <input
+              type="text"
+                placeholder="Name"
+                value={newSweet.name}
+                onChange={(e) => setNewSweet({ ...newSweet, name: e.target.value })}
+              />
+              <input
+                type="text"
+                placeholder="Category"
+                value={newSweet.category}
+                onChange={(e) => setNewSweet({ ...newSweet, category: e.target.value })}
+              />
+              <input
+                type="number"
+                placeholder="Price"
+                value={newSweet.price}
+                onChange={(e) => setNewSweet({ ...newSweet, price: e.target.value })}
+              />
+              <input
+                type="number"
+                placeholder="Quantity"
+                value={newSweet.quantity}
+                onChange={(e) => setNewSweet({ ...newSweet, quantity: e.target.value })}
+              />
+              <div class="add-sweet-photo">
+                <span>📷 Photo</span>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => setNewSweet({ ...newSweet, photo: e.target.files[0] })}
+                />
               </div>
-            )}
-          </section>
+              <div class="add-sweet-video">
+                <span>🎥 Video</span>
+                <input
+                  type="file"
+                  accept="video/*"
+                  onChange={(e) => setNewSweet({ ...newSweet, video: e.target.files[0] })}
+                />
+              </div>
+              <button onClick={handleAddSweet} class="add-btn">
+                <PlusIcon /> Add Sweet
+              </button>
+            </div>
+          </div>
         )}
-      </div>
+      </section>
+    )}
+  </div>
+</div>
 
       <hr style={{border: "none", borderTop: "2px solid #ddd", margin: "40px 0"}} />
 
