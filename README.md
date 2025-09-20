@@ -66,29 +66,43 @@ The system supports user authentication, role-based access (Admin & User), CRUD 
 ### Backend (`/backend`)
 backend/
 == config/
+
 ==== CorsConfig.java
+
 ==== CustomUserDetailsService.java
+
 ==== JwtAuthenticationFilter.java
+
 ==== JwtUtil.java
+
 ==== SecurityConfig.java
 
 == controller/
+
 ==== AuthController.java
+
 ==== SweetController.java
 
 == dto
+
 ==== AuthResponse.java
 
 == model
+
 ==== Sweet.java
+
 ==== User.java
 
 == repository
+
 ==== SweetRepository.java
+
 ==== UserRepository.java
 
 == service
+
 ==== SweetService.java
+
 ==== UserService.java
 
 == SweetShopApplication.java (inside of /backend/)
@@ -98,27 +112,41 @@ backend/
 📂 src/assets: This folder contains static assets like images and icons.
 
 background.png 
+
 icon.jpeg 
+
 react.svg 
 
 📂 src/pages: This folder holds the main application pages, typically consisting of a JSX component and its corresponding CSS stylesheet.
 
 Auth.css
+
 Auth.jsx 🔐
+
 Dashboard.css
+
 Dashboard.jsx 📊
+
 Icons.jsx ✨
 
 📂 src: This folder is for files which are used across the application.
 
 App.css
+
 App.jsx
+
 halwai.jpg
+
 index.css
+
 main.jsx
+
 .gitignore
+
 eslint.config.js
+
 index.html
+
 package-lock.json
 
 
