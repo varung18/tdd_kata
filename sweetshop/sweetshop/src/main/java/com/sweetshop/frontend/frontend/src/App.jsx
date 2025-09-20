@@ -1,19 +1,36 @@
-import React from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import Auth from "./pages/Auth.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 
 function App() {
-  const token = localStorage.getItem("token");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Check for token on initial load
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  const handleLoginSuccess = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    setIsLoggedIn(false);
+  };
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Auth />} />          {/* Combined Login/Register */}
-        <Route path="/dashboard" element={token ? <Dashboard /> : <Navigate to="/" />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </BrowserRouter>
+    <div>
+      {isLoggedIn ? (
+        <Dashboard onLogout={handleLogout} />
+      ) : (
+        <Auth onLoginSuccess={handleLoginSuccess} />
+      )}
+    </div>
   );
 }
 
