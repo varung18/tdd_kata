@@ -1,36 +1,80 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import halwaiImage from "../halwai.jpg";
 
 // Inline SVG icons to replace react-icons/fa
 const EditIcon = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="16" height="16" fill="currentColor" {...props}>
-    <path d="M402.6 83.2l-10.2 11.2-4.1-1.3-4.2-1.3L400.3 80c-7.9-1.9-15.9 1.4-20.7 7.4L114.2 380.2l12.4 12.4 135.2 135.2L421.1 274.6c2.7-2.6 5.6-5 8.7-7.2l13.6-9.7 13.6-9.7c5.6-3.8 8.4-9.8 8.7-16.1l.1-1.2.1-1.2V112c0-8.8-7.2-16-16-16H416c-8.8 0-16 7.2-16 16v88.2l20.8-20.8L402.6 83.2zM286.7 480.1L24 480c-13.3 0-24-10.7-24-24V329.3c0-1.8 .1-3.6 .2-5.4L208.6 114.7l13.5 13.5-197.8 197.8c-2 2-3.1 4.7-3.1 7.6v127.4c0 1.5 1.2 2.7 2.7 2.7h127.4c2.8 0 5.5-1.1 7.6-3.1l197.8-197.8 13.5 13.5L286.7 480.1zM560 210.7L448 98.7V32c0-17.7-14.3-32-32-32H160C142.3 0 128 14.3 128 32v240c0 17.7 14.3 32 32 32h288c17.7 0 32-14.3 32-32V112l32.7 32.7L560 210.7zM422.6 83.2L555.2 215.8 422.6 348.4 290 215.8 422.6 83.2z"/>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 576 512"
+    width="16"
+    height="16"
+    fill="currentColor"
+    {...props}
+  >
+    <path d="M402.6 83.2l-10.2 11.2-4.1-1.3-4.2-1.3L400.3 80c-7.9-1.9-15.9 1.4-20.7 7.4L114.2 380.2l12.4 12.4 135.2 135.2L421.1 274.6c2.7-2.6 5.6-5 8.7-7.2l13.6-9.7 13.6-9.7c5.6-3.8 8.4-9.8 8.7-16.1l.1-1.2.1-1.2V112c0-8.8-7.2-16-16-16H416c-8.8 0-16 7.2-16 16v88.2l20.8-20.8L402.6 83.2zM286.7 480.1L24 480c-13.3 0-24-10.7-24-24V329.3c0-1.8 .1-3.6 .2-5.4L208.6 114.7l13.5 13.5-197.8 197.8c-2 2-3.1 4.7-3.1 7.6v127.4c0 1.5 1.2 2.7 2.7 2.7h127.4c2.8 0 5.5-1.1 7.6-3.1l197.8-197.8 13.5 13.5L286.7 480.1zM560 210.7L448 98.7V32c0-17.7-14.3-32-32-32H160C142.3 0 128 14.3 128 32v240c0 17.7 14.3 32 32 32h288c17.7 0 32-14.3 32-32V112l32.7 32.7L560 210.7zM422.6 83.2L555.2 215.8 422.6 348.4 290 215.8 422.6 83.2z" />
   </svg>
 );
 const TrashIcon = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16" height="16" fill="currentColor" {...props}>
-    <path d="M135.2 17.6c-4.5-10-8.3-15.6-13.9-17.2-11-3.2-22.3 5.3-25.5 16.3L89.6 40.5c-6.8-2.6-14-3.5-21.2-2.9C52.7 38.3 40 45.9 31.8 58l-5.3 7.9c-8.8 13.1-10.7 29.8-5.3 44.5L50.5 128H44.8C20.1 128 0 148.1 0 172.8V216c0 1.2.1 2.3.2 3.5l1.8 23c6.9 88.3 40.8 163.7 110.1 228.8c42.8 39.8 91.1 63.8 141.5 72.8c11.7 2.1 23.6 3.1 35.5 3.1h1c4.9 0 9.7-.3 14.6-.9l1-1.3c21-27.8 38.6-56.1 52.8-85.7c26.9-56.3 43-118.8 44.1-182.2l1.3-76.8L448 217.3V176c0-12.9-5.1-25.7-14.1-34.9l-45.9-46c-9.1-9.1-21.8-14.1-34.9-14.1H292.8c-12.9 0-25.7 5.1-34.9 14.1l-14.1 14.1L238.7 85.3 170 30.2l-34.8-12.6zM296 464c-31.5-6-62.4-18.7-90.3-38.6c-39.7-27.9-72-65.5-94.8-109.8c-13.8-26.6-24-54.8-30.2-84.4l-1.3-66.2H388.5l-1.4 67.5c-6 29-16.1 56.6-29.6 82.5-22.5 43.1-54.5 80-93.5 107.4c-28.2 19.4-58.8 31.5-90.8 37.5zM200 240v128c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16s16 7.2 16 16zm64 0v128c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16s16 7.2 16 16z"/>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 448 512"
+    width="16"
+    height="16"
+    fill="currentColor"
+    {...props}
+  >
+    <path d="M135.2 17.6c-4.5-10-8.3-15.6-13.9-17.2-11-3.2-22.3 5.3-25.5 16.3L89.6 40.5c-6.8-2.6-14-3.5-21.2-2.9C52.7 38.3 40 45.9 31.8 58l-5.3 7.9c-8.8 13.1-10.7 29.8-5.3 44.5L50.5 128H44.8C20.1 128 0 148.1 0 172.8V216c0 1.2.1 2.3.2 3.5l1.8 23c6.9 88.3 40.8 163.7 110.1 228.8c42.8 39.8 91.1 63.8 141.5 72.8c11.7 2.1 23.6 3.1 35.5 3.1h1c4.9 0 9.7-.3 14.6-.9l1-1.3c21-27.8 38.6-56.1 52.8-85.7c26.9-56.3 43-118.8 44.1-182.2l1.3-76.8L448 217.3V176c0-12.9-5.1-25.7-14.1-34.9l-45.9-46c-9.1-9.1-21.8-14.1-34.9-14.1H292.8c-12.9 0-25.7 5.1-34.9 14.1l-14.1 14.1L238.7 85.3 170 30.2l-34.8-12.6zM296 464c-31.5-6-62.4-18.7-90.3-38.6c-39.7-27.9-72-65.5-94.8-109.8c-13.8-26.6-24-54.8-30.2-84.4l-1.3-66.2H388.5l-1.4 67.5c-6 29-16.1 56.6-29.6 82.5-22.5 43.1-54.5 80-93.5 107.4c-28.2 19.4-58.8 31.5-90.8 37.5zM200 240v128c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16s16 7.2 16 16zm64 0v128c0 8.8-7.2 16-16 16s-16-7.2-16-16V240c0-8.8 7.2-16 16-16s16 7.2 16 16z" />
   </svg>
 );
 const PlusIcon = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="16" height="16" fill="currentColor" {...props}>
-    <path d="M432 256c0 17.7-14.3 32-32 32H288c-17.7 0-32-14.3-32-32V128c0-17.7-14.3-32-32-32s-32 14.3-32 32v128H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h128v128c0 17.7 14.3 32 32 32s32-14.3 32-32V320h128c17.7 0 32-14.3 32-32z"/>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 448 512"
+    width="16"
+    height="16"
+    fill="currentColor"
+    {...props}
+  >
+    <path d="M432 256c0 17.7-14.3 32-32 32H288c-17.7 0-32-14.3-32-32V128c0-17.7-14.3-32-32-32s-32 14.3-32 32v128H48c-17.7 0-32 14.3-32 32s14.3 32 32 32h128v128c0 17.7 14.3 32 32 32s32-14.3 32-32V320h128c17.7 0 32-14.3 32-32z" />
   </svg>
 );
 const SearchIcon = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16" fill="currentColor" {...props}>
-    <path d="M416 208c0 45.9-14.9 88.3-40.4 121.7L469.7 435.5c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L341.3 360.4c-33.4 25.5-75.8 40.4-121.7 40.4C93.1 400 0 306.9 0 208S93.1 16 208 16s208 93.1 208 192zM208 64c-88.4 0-160 71.6-160 160s71.6 160 160 160s160-71.6 160-160s-71.6-160-160-160z"/>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 512 512"
+    width="16"
+    height="16"
+    fill="currentColor"
+    {...props}
+  >
+    <path d="M416 208c0 45.9-14.9 88.3-40.4 121.7L469.7 435.5c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L341.3 360.4c-33.4 25.5-75.8 40.4-121.7 40.4C93.1 400 0 306.9 0 208S93.1 16 208 16s208 93.1 208 192zM208 64c-88.4 0-160 71.6-160 160s71.6 160 160 160s160-71.6 160-160s-71.6-160-160-160z" />
   </svg>
 );
 const SyncIcon = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="16" height="16" fill="currentColor" {...props}>
-    <path d="M472 232c-6.6 0-12 5.4-12 12s5.4 12 12 12c40.8 0 74.3 33.5 74.3 74.3c0 40.8-33.5 74.3-74.3 74.3c-24.4 0-46.7-12-61.6-31.5-3.3-4.3-9.5-5.2-14.1-2l-40.8 30.6c-4.6 3.4-6.3 9.7-3.9 15c26.9 59.9 89.2 100 160.4 100C491 480 544 427 544 360c0-67-53-120-120-120zM208 280c-4.4 0-8-3.6-8-8V88c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v184c0 4.4-3.6 8-8 8h-48zM186.2 368c-1.2 0-2.4-.2-3.6-.5c-4.9-1.2-8.3-6.2-7.1-11.1l11.1-45.2c1.2-4.9 6.2-8.3 11.1-7.1l45.2 11.1c4.9 1.2 8.3 6.2 7.1 11.1l-11.1 45.2c-1.2 4.9-6.2 8.3-11.1 7.1L186.2 368zM312 360c-4.4 0-8-3.6-8-8V152c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v200c0 4.4-3.6 8-8 8h-48zM128 360c-4.4 0-8-3.6-8-8V152c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v200c0 4.4 3.6 8-8 8h-48zM40 280c-4.4 0-8-3.6-8-8V88c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v184c0 4.4 3.6 8-8 8h-48zM240 104c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v184c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V104zM368 104c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v184c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V104zM496 104c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v184c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V104zM24 240c-4.4 0-8-3.6-8-8V88c0-4.4 3.6-8 8-8H40c-4.4 0-8 3.6-8 8v152c0 4.4 3.6 8 8 8h-48c-4.4 0-8 3.6-8 8v-152z"/>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 512 512"
+    width="16"
+    height="16"
+    fill="currentColor"
+    {...props}
+  >
+    <path d="M472 232c-6.6 0-12 5.4-12 12s5.4 12 12 12c40.8 0 74.3 33.5 74.3 74.3c0 40.8-33.5 74.3-74.3 74.3c-24.4 0-46.7-12-61.6-31.5-3.3-4.3-9.5-5.2-14.1-2l-40.8 30.6c-4.6 3.4-6.3 9.7-3.9 15c26.9 59.9 89.2 100 160.4 100C491 480 544 427 544 360c0-67-53-120-120-120zM208 280c-4.4 0-8-3.6-8-8V88c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v184c0 4.4-3.6 8-8 8h-48zM186.2 368c-1.2 0-2.4-.2-3.6-.5c-4.9-1.2-8.3-6.2-7.1-11.1l11.1-45.2c1.2-4.9 6.2-8.3 11.1-7.1l45.2 11.1c4.9 1.2 8.3 6.2 7.1 11.1l-11.1 45.2c-1.2 4.9-6.2 8.3-11.1 7.1L186.2 368zM312 360c-4.4 0-8-3.6-8-8V152c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v200c0 4.4-3.6 8-8 8h-48zM128 360c-4.4 0-8-3.6-8-8V152c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v200c0 4.4 3.6 8-8 8h-48zM40 280c-4.4 0-8-3.6-8-8V88c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v184c0 4.4 3.6 8-8 8h-48zM240 104c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v184c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V104zM368 104c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v184c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V104zM496 104c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v184c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V104zM24 240c-4.4 0-8-3.6-8-8V88c0-4.4 3.6-8 8-8H40c-4.4 0-8 3.6-8 8v152c0 4.4 3.6 8 8 8h-48c-4.4 0-8 3.6-8 8v-152z" />
   </svg>
 );
 
 // New component for a single sweet card
-const SweetCard = ({ sweet, isAdmin, mediaUrls, handlePurchase, setEditSweet, handleDeleteSweet, handleRestockSweet }) => {
+const SweetCard = ({
+  sweet,
+  isAdmin,
+  mediaUrls,
+  handlePurchase,
+  setEditSweet,
+  handleDeleteSweet,
+  handleRestockSweet,
+}) => {
   const [isHovering, setIsHovering] = useState(false);
 
   return (
@@ -45,10 +89,25 @@ const SweetCard = ({ sweet, isAdmin, mediaUrls, handlePurchase, setEditSweet, ha
             <img
               src={mediaUrls[sweet.id].photo}
               alt={sweet.name}
-              className={`sweet-image ${isHovering && mediaUrls[sweet.id]?.video ? 'opacity-0' : 'opacity-100'}`}
+              className={`sweet-image ${
+                isHovering && mediaUrls[sweet.id]?.video
+                  ? "opacity-0"
+                  : "opacity-100"
+              }`}
             />
           ) : (
-            <span style={{ color: '#999', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', zIndex: 1 }}>No media available</span>
+            <span
+              style={{
+                color: "#999",
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                zIndex: 1,
+              }}
+            >
+              No media available
+            </span>
           )}
           {isHovering && mediaUrls[sweet.id]?.video && (
             <video
@@ -67,9 +126,15 @@ const SweetCard = ({ sweet, isAdmin, mediaUrls, handlePurchase, setEditSweet, ha
       </div>
 
       <h3>{sweet.name}</h3>
-      <p>Category: <span>{sweet.category}</span></p>
-      <p>Price: <span>₹{sweet.price}</span></p>
-      <p>Quantity: <span>{sweet.quantity}</span></p>
+      <p>
+        Category: <span>{sweet.category}</span>
+      </p>
+      <p>
+        Price: <span>₹{sweet.price}</span>
+      </p>
+      <p>
+        Quantity: <span>{sweet.quantity}</span>
+      </p>
 
       <div className="actions-container">
         <button
@@ -81,13 +146,22 @@ const SweetCard = ({ sweet, isAdmin, mediaUrls, handlePurchase, setEditSweet, ha
         </button>
         {isAdmin && (
           <>
-            <button onClick={() => setEditSweet(sweet)} className="action-btn edit-btn">
+            <button
+              onClick={() => setEditSweet(sweet)}
+              className="action-btn edit-btn"
+            >
               <EditIcon /> Edit
             </button>
-            <button onClick={() => handleDeleteSweet(sweet.id)} className="action-btn delete-btn">
+            <button
+              onClick={() => handleDeleteSweet(sweet.id)}
+              className="action-btn delete-btn"
+            >
               <TrashIcon /> Delete
             </button>
-            <button onClick={() => handleRestockSweet(sweet.id)} className="action-btn restock-btn">
+            <button
+              onClick={() => handleRestockSweet(sweet.id)}
+              className="action-btn restock-btn"
+            >
               <PlusIcon /> Restock
             </button>
           </>
@@ -96,7 +170,6 @@ const SweetCard = ({ sweet, isAdmin, mediaUrls, handlePurchase, setEditSweet, ha
     </div>
   );
 };
-
 
 function Dashboard() {
   const [sweets, setSweets] = useState([]);
@@ -220,12 +293,16 @@ function Dashboard() {
         formData.append("video", editFiles.video);
       }
 
-      await axios.put(`http://localhost:8080/api/sweets/${editSweet.id}`, formData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axios.put(
+        `http://localhost:8080/api/sweets/${editSweet.id}`,
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       alert("Sweet updated! ✅");
       setEditSweet(null);
       setEditFiles({ photo: null, video: null });
@@ -308,19 +385,28 @@ function Dashboard() {
         try {
           // Fetch photo
           const photoUrl = `http://localhost:8080/api/sweets/${sweet.id}/photo`;
-          const photoRes = await axios.get(photoUrl, { responseType: 'blob' });
+          const photoRes = await axios.get(photoUrl, { responseType: "blob" });
           if (photoRes.data.size > 0) {
-            newMediaUrls[sweet.id] = { ...newMediaUrls[sweet.id], photo: URL.createObjectURL(photoRes.data) };
+            newMediaUrls[sweet.id] = {
+              ...newMediaUrls[sweet.id],
+              photo: URL.createObjectURL(photoRes.data),
+            };
           }
 
           // Fetch video
           const videoUrl = `http://localhost:8080/api/sweets/${sweet.id}/video`;
-          const videoRes = await axios.get(videoUrl, { responseType: 'blob' });
+          const videoRes = await axios.get(videoUrl, { responseType: "blob" });
           if (videoRes.data.size > 0) {
-            newMediaUrls[sweet.id] = { ...newMediaUrls[sweet.id], video: URL.createObjectURL(videoRes.data) };
+            newMediaUrls[sweet.id] = {
+              ...newMediaUrls[sweet.id],
+              video: URL.createObjectURL(videoRes.data),
+            };
           }
         } catch (error) {
-          console.error(`Failed to fetch media for sweet ID ${sweet.id}:`, error);
+          console.error(
+            `Failed to fetch media for sweet ID ${sweet.id}:`,
+            error
+          );
           // Don't set a URL for this sweet, so it falls back to "No media available"
         }
       }
@@ -332,8 +418,12 @@ function Dashboard() {
     }
   }, [sweets]);
 
-
-  if (loading) return <div className="loading-container"><h3>Loading sweets... ⏳</h3></div>;
+  if (loading)
+    return (
+      <div className="loading-container">
+        <h3>Loading sweets... ⏳</h3>
+      </div>
+    );
 
   return (
     <div className="dashboard-container">
@@ -343,6 +433,8 @@ function Dashboard() {
           background-color: #f0f2f5;
           margin: 0;
           padding: 0;
+          display: flex;
+  flex-direction: column;
         }
 
         body, html {
@@ -350,7 +442,9 @@ function Dashboard() {
   padding: 0;
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
 }
+
 
         .dashboard-container {
           padding: 40px;
@@ -573,6 +667,7 @@ function Dashboard() {
           display: grid;
           grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
           gap: 25px;
+          flex: 1;
         }
 
         .sweet-card {
@@ -749,156 +844,254 @@ header h2 {
   color: #d81b60; /* Dark pink for a pop */
 }
 
+.dashboard-footer {
+          width: 100vw;
+          margin-left: calc(50% - 50vw);
+          min-height: 450px;
+          background: linear-gradient(to bottom, #808000 60%, #000000 60%);
+          position: relative;
+          color: white;
+        }
+        
+        .footer-top {
+          /* Use CSS Grid for a horizontal 3-column layout */
+          display: grid;
+          grid-template-columns: 2fr 1fr 1fr; /* Defines three columns with a 2:1:1 width ratio */
+          gap: 30px;
+          padding: 30px;
+          min-height: 180px;
+        }
+        
+        .footer-column {
+          padding: 15px;
+        }
+
+        .text-column {
+          align-self: center; /* Vertically centers the text within its grid cell */
+          text-align: justify;
+          position: relative;
+        }
+        
+        .map-column {
+          border: 2px solid white;
+          border-radius: 8px;
+          overflow: hidden;
+        }
+        
+        .image-column {
+          border: 2px dashed white;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .image-placeholder {
+          width: 100%;
+          height: 100%;
+          min-height: 100px;
+        }
+        
+        .footer-bottom {
+          /* Adjust height to accommodate content */
+          min-height: 50px; 
+          display: flex; /* Use flexbox to align content */
+          align-items: center; /* Vertically center content */
+          justify-content: center; /* Horizontally center the inner container */
+        }
+
+        .footer-bottom-content {
+          width: 100%;
+          display: flex;
+          justify-content: space-between; 
+          align-items: flex-end; /* This aligns the text to the bottom of the container */
+          padding: 0 50px 10px; /* Add padding-bottom to create space from the edge */
+          color: white; 
+          font-size: 14px;
+        }
         
       `}</style>
       <div class="ribbon-container">
-  <header>
-    <h2>🍬 Sweet Shop Dashboard 🍭</h2>
-    <button
-      onClick={() => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("role");
-        navigate("/");
-      }}
-      className="logout-btn"
-    >
-      Login / Register
-    </button>
-  </header>
+        <header>
+          <h2>🍬 Sweet Shop Dashboard 🍭</h2>
+          <button
+            onClick={() => {
+              localStorage.removeItem("token");
+              localStorage.removeItem("role");
+              navigate("/");
+            }}
+            className="logout-btn"
+          >
+            Login / Register
+          </button>
+        </header>
 
-  <div class="forms-container">
-    <section class="form-section">
-      <div class="search-bar-container">
-        <input
-          type="text"
-          name="name"
-          placeholder="Search by name"
-          value={filters.name}
-          onChange={handleFilterChange}
-          onKeyDown={(e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      handleSearch();
-    }
-  }}
-        />
-        <button
-          class="form-toggle-btn search"
-          onClick={() => setShowFilterForm(!showFilterForm)}
-        >
-          <SearchIcon /> {showFilterForm ? "Hide Filters" : "Filter"}
-        </button>
-      </div>
-      {showFilterForm && (
-        <div class="search-form-expanded">
-          <div class="form-grid">
-            <input
-              type="number"
-              name="minPrice"
-              placeholder="Min Price"
-              value={filters.minPrice}
-              onChange={handleFilterChange}
-            />
-            <input
-              type="number"
-              name="maxPrice"
-              placeholder="Max Price"
-              value={filters.maxPrice}
-              onChange={handleFilterChange}
-            />
-            <input
-              type="text"
-              name="category"
-              placeholder="Category"
-              value={filters.category}
-              onChange={handleFilterChange}
-            />
-          </div>
-          <div style={{ display: "flex", gap: "10px", marginTop: "15px" }}>
-            <button onClick={handleSearch} class="search-btn">
-              <SearchIcon /> Search
-            </button>
-            <button
-              onClick={() => {
-                setFilters({ minPrice: "", maxPrice: "", category: "", name: "" });
-                fetchSweets(); // reset to all sweets
-              }}
-              class="reset-btn"
-            >
-              <SyncIcon /> Reset
-            </button>
-          </div>
-        </div>
-      )}
-    </section>
-
-    {isAdmin && (
-      <section class="form-section">
-        <button
-          class="form-toggle-btn"
-          onClick={() => setShowAddForm(!showAddForm)}
-        >
-          <PlusIcon /> {showAddForm ? "Hide Add Sweet Form" : "Add New Sweet"}
-        </button>
-        {showAddForm && (
-          <div class="add-sweet-form">
-            <div class="form-grid">
-              <input
-              type="text"
-                placeholder="Name"
-                value={newSweet.name}
-                onChange={(e) => setNewSweet({ ...newSweet, name: e.target.value })}
-              />
+        <div class="forms-container">
+          <section class="form-section">
+            <div class="search-bar-container">
               <input
                 type="text"
-                placeholder="Category"
-                value={newSweet.category}
-                onChange={(e) => setNewSweet({ ...newSweet, category: e.target.value })}
+                name="name"
+                placeholder="Search by name"
+                value={filters.name}
+                onChange={handleFilterChange}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    handleSearch();
+                  }
+                }}
               />
-              <input
-                type="number"
-                placeholder="Price"
-                value={newSweet.price}
-                onChange={(e) => setNewSweet({ ...newSweet, price: e.target.value })}
-              />
-              <input
-                type="number"
-                placeholder="Quantity"
-                value={newSweet.quantity}
-                onChange={(e) => setNewSweet({ ...newSweet, quantity: e.target.value })}
-              />
-              <div class="add-sweet-photo">
-                <span>📷 Photo</span>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => setNewSweet({ ...newSweet, photo: e.target.files[0] })}
-                />
-              </div>
-              <div class="add-sweet-video">
-                <span>🎥 Video</span>
-                <input
-                  type="file"
-                  accept="video/*"
-                  onChange={(e) => setNewSweet({ ...newSweet, video: e.target.files[0] })}
-                />
-              </div>
-              <button onClick={handleAddSweet} class="add-btn">
-                <PlusIcon /> Add Sweet
+              <button
+                class="form-toggle-btn search"
+                onClick={() => setShowFilterForm(!showFilterForm)}
+              >
+                <SearchIcon /> {showFilterForm ? "Hide Filters" : "Filter"}
               </button>
             </div>
-          </div>
-        )}
-      </section>
-    )}
-  </div>
-</div>
+            {showFilterForm && (
+              <div class="search-form-expanded">
+                <div class="form-grid">
+                  <input
+                    type="number"
+                    name="minPrice"
+                    placeholder="Min Price"
+                    value={filters.minPrice}
+                    onChange={handleFilterChange}
+                  />
+                  <input
+                    type="number"
+                    name="maxPrice"
+                    placeholder="Max Price"
+                    value={filters.maxPrice}
+                    onChange={handleFilterChange}
+                  />
+                  <input
+                    type="text"
+                    name="category"
+                    placeholder="Category"
+                    value={filters.category}
+                    onChange={handleFilterChange}
+                  />
+                </div>
+                <div
+                  style={{ display: "flex", gap: "10px", marginTop: "15px" }}
+                >
+                  <button onClick={handleSearch} class="search-btn">
+                    <SearchIcon /> Search
+                  </button>
+                  <button
+                    onClick={() => {
+                      setFilters({
+                        minPrice: "",
+                        maxPrice: "",
+                        category: "",
+                        name: "",
+                      });
+                      fetchSweets(); // reset to all sweetss
+                    }}
+                    class="reset-btn"
+                  >
+                    <SyncIcon /> Reset
+                  </button>
+                </div>
+              </div>
+            )}
+          </section>
 
-      <hr style={{border: "none", borderTop: "2px solid #ddd", margin: "40px 0"}} />
+          {isAdmin && (
+            <section class="form-section">
+              <button
+                class="form-toggle-btn"
+                onClick={() => setShowAddForm(!showAddForm)}
+              >
+                <PlusIcon />{" "}
+                {showAddForm ? "Hide Add Sweet Form" : "Add New Sweet"}
+              </button>
+              {showAddForm && (
+                <div class="add-sweet-form">
+                  <div class="form-grid">
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      value={newSweet.name}
+                      onChange={(e) =>
+                        setNewSweet({ ...newSweet, name: e.target.value })
+                      }
+                    />
+                    <input
+                      type="text"
+                      placeholder="Category"
+                      value={newSweet.category}
+                      onChange={(e) =>
+                        setNewSweet({ ...newSweet, category: e.target.value })
+                      }
+                    />
+                    <input
+                      type="number"
+                      placeholder="Price"
+                      value={newSweet.price}
+                      onChange={(e) =>
+                        setNewSweet({ ...newSweet, price: e.target.value })
+                      }
+                    />
+                    <input
+                      type="number"
+                      placeholder="Quantity"
+                      value={newSweet.quantity}
+                      onChange={(e) =>
+                        setNewSweet({ ...newSweet, quantity: e.target.value })
+                      }
+                    />
+                    <div class="add-sweet-photo">
+                      <span>📷 Photo</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) =>
+                          setNewSweet({ ...newSweet, photo: e.target.files[0] })
+                        }
+                      />
+                    </div>
+                    <div class="add-sweet-video">
+                      <span>🎥 Video</span>
+                      <input
+                        type="file"
+                        accept="video/*"
+                        onChange={(e) =>
+                          setNewSweet({ ...newSweet, video: e.target.files[0] })
+                        }
+                      />
+                    </div>
+                    <button onClick={handleAddSweet} class="add-btn">
+                      <PlusIcon /> Add Sweet
+                    </button>
+                  </div>
+                </div>
+              )}
+            </section>
+          )}
+        </div>
+      </div>
+
+      <hr
+        style={{
+          border: "none",
+          borderTop: "2px solid #ddd",
+          margin: "40px 0",
+        }}
+      />
 
       <main className="sweets-grid">
         {sweets.length === 0 ? (
-          <p style={{ gridColumn: "1 / -1", textAlign: "center", color: "#888", fontSize: "1.2rem" }}>
+          <p
+            style={{
+              gridColumn: "1 / -1",
+              textAlign: "center",
+              color: "#888",
+              fontSize: "1.2rem",
+            }}
+          >
             No sweets available.
           </p>
         ) : (
@@ -908,13 +1101,21 @@ header h2 {
                 // Edit form section
                 <div className="sweet-card">
                   <h3>Edit Sweet</h3>
-                  <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "15px",
+                    }}
+                  >
                     <div className="form-field">
                       <label>Name</label>
                       <input
                         placeholder="Name"
                         value={editSweet.name}
-                        onChange={(e) => setEditSweet({ ...editSweet, name: e.target.value })}
+                        onChange={(e) =>
+                          setEditSweet({ ...editSweet, name: e.target.value })
+                        }
                       />
                     </div>
                     <div className="form-field">
@@ -922,7 +1123,12 @@ header h2 {
                       <input
                         placeholder="Category"
                         value={editSweet.category}
-                        onChange={(e) => setEditSweet({ ...editSweet, category: e.target.value })}
+                        onChange={(e) =>
+                          setEditSweet({
+                            ...editSweet,
+                            category: e.target.value,
+                          })
+                        }
                       />
                     </div>
                     <div className="form-field">
@@ -931,7 +1137,9 @@ header h2 {
                         type="number"
                         placeholder="Price"
                         value={editSweet.price}
-                        onChange={(e) => setEditSweet({ ...editSweet, price: e.target.value })}
+                        onChange={(e) =>
+                          setEditSweet({ ...editSweet, price: e.target.value })
+                        }
                       />
                     </div>
                     <div className="form-field">
@@ -940,14 +1148,23 @@ header h2 {
                         type="number"
                         placeholder="Quantity"
                         value={editSweet.quantity}
-                        onChange={(e) => setEditSweet({ ...editSweet, quantity: e.target.value })}
+                        onChange={(e) =>
+                          setEditSweet({
+                            ...editSweet,
+                            quantity: e.target.value,
+                          })
+                        }
                       />
                     </div>
 
                     <div className="form-field">
                       {mediaUrls[sweet.id]?.photo && (
                         <div style={{ marginBottom: "10px" }}>
-                          <label style={{ fontWeight: "bold", fontSize: "14px" }}>Current Photo:</label>
+                          <label
+                            style={{ fontWeight: "bold", fontSize: "14px" }}
+                          >
+                            Current Photo:
+                          </label>
                           <img
                             src={mediaUrls[sweet.id].photo}
                             alt="Current"
@@ -961,14 +1178,27 @@ header h2 {
                           />
                         </div>
                       )}
-                      <label style={{ fontWeight: "bold", fontSize: "14px" }}>📷 Update Photo (optional):</label>
+                      <label style={{ fontWeight: "bold", fontSize: "14px" }}>
+                        📷 Update Photo (optional):
+                      </label>
                       <input
                         type="file"
                         accept="image/*"
-                        onChange={(e) => setEditFiles({ ...editFiles, photo: e.target.files[0] })}
+                        onChange={(e) =>
+                          setEditFiles({
+                            ...editFiles,
+                            photo: e.target.files[0],
+                          })
+                        }
                       />
                       {editFiles.photo && (
-                        <span style={{ fontSize: "12px", color: "green", marginTop: "5px" }}>
+                        <span
+                          style={{
+                            fontSize: "12px",
+                            color: "green",
+                            marginTop: "5px",
+                          }}
+                        >
                           New photo selected: {editFiles.photo.name}
                         </span>
                       )}
@@ -976,7 +1206,11 @@ header h2 {
                     <div className="form-field">
                       {mediaUrls[sweet.id]?.video && (
                         <div style={{ marginBottom: "10px" }}>
-                          <label style={{ fontWeight: "bold", fontSize: "14px" }}>Current Video:</label>
+                          <label
+                            style={{ fontWeight: "bold", fontSize: "14px" }}
+                          >
+                            Current Video:
+                          </label>
                           <video
                             controls
                             style={{
@@ -986,26 +1220,51 @@ header h2 {
                               marginTop: "5px",
                             }}
                           >
-                            <source src={mediaUrls[sweet.id].video} type="video/mp4" />
+                            <source
+                              src={mediaUrls[sweet.id].video}
+                              type="video/mp4"
+                            />
                             Your browser does not support the video tag.
                           </video>
                         </div>
                       )}
-                      <label style={{ fontWeight: "bold", fontSize: "14px" }}>🎥 Update Video (optional):</label>
+                      <label style={{ fontWeight: "bold", fontSize: "14px" }}>
+                        🎥 Update Video (optional):
+                      </label>
                       <input
                         type="file"
                         accept="video/*"
-                        onChange={(e) => setEditFiles({ ...editFiles, video: e.target.files[0] })}
+                        onChange={(e) =>
+                          setEditFiles({
+                            ...editFiles,
+                            video: e.target.files[0],
+                          })
+                        }
                       />
                       {editFiles.video && (
-                        <span style={{ fontSize: "12px", color: "green", marginTop: "5px" }}>
+                        <span
+                          style={{
+                            fontSize: "12px",
+                            color: "green",
+                            marginTop: "5px",
+                          }}
+                        >
                           New video selected: {editFiles.video.name}
                         </span>
                       )}
                     </div>
 
-                    <div style={{ display: "flex", gap: "10px", marginTop: "10px" }}>
-                      <button onClick={handleUpdateSweet} className="action-btn save-btn">
+                    <div
+                      style={{
+                        display: "flex",
+                        gap: "10px",
+                        marginTop: "10px",
+                      }}
+                    >
+                      <button
+                        onClick={handleUpdateSweet}
+                        className="action-btn save-btn"
+                      >
                         Save
                       </button>
                       <button
@@ -1021,11 +1280,11 @@ header h2 {
                   </div>
                 </div>
               ) : (
-                <SweetCard 
-                  sweet={sweet} 
-                  isAdmin={isAdmin} 
-                  mediaUrls={mediaUrls} 
-                  handlePurchase={handlePurchase} 
+                <SweetCard
+                  sweet={sweet}
+                  isAdmin={isAdmin}
+                  mediaUrls={mediaUrls}
+                  handlePurchase={handlePurchase}
                   setEditSweet={setEditSweet}
                   handleDeleteSweet={handleDeleteSweet}
                   handleRestockSweet={handleRestockSweet}
@@ -1035,6 +1294,52 @@ header h2 {
           ))
         )}
       </main>
+      {/* New Footer */}
+      <footer className="dashboard-footer">
+        <div className="footer-top">
+          {/* Column 1: Text */}
+          <div className="footer-column text-column">
+            <p>
+              Ranked #1 among the best sweet shops in Vadodara, our store takes
+              pride in serving you the finest range of traditional and modern
+              sweets. Every delight is prepared with love, purity, and unmatched
+              taste — all while being 100% vegetarian. Look for the trusted
+              green vegetarian logo, because at our shop, quality and
+              authenticity are always guaranteed.
+            </p>
+          </div>
+          {/* Column 2: Google Maps */}
+          <div className="footer-column map-column">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d118106.70010221681!2d73.17308625!3d22.32210265!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395fc8ab91a3ddab%3A0xac39d3bfe1473fb8!2sVadodara%2C%20Gujarat!5e0!3m2!1sen!2sin!4v1758291568900!5m2!1sen!2sin"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              title="Google Map Location"
+            ></iframe>
+          </div>
+          {/* Column 3: Image Placeholder */}
+          <div className="footer-column image-column">
+            {/* Replace the div with an img tag */}
+            <img
+              src={halwaiImage}
+              alt="Assortment of traditional Indian sweets"
+              className="footer-image"
+              height="185px"
+            />
+          </div>
+        </div>
+
+        {/* Bottom 40% Section (Black) */}
+        <div className="footer-bottom">
+          <div className="footer-bottom-content">
+            <span>Copyright 2025, Varun Gaur</span>
+            <span>Call us on: 1234-95-94-93</span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
