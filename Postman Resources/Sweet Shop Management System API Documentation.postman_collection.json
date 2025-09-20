@@ -1,0 +1,596 @@
+{
+	"info": {
+		"_postman_id": "ab9a77d7-568d-432a-8085-5845f2aacc54",
+		"name": "Sweet Shop Management System API Documentation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48557853",
+		"_collection_link": "https://red-moon-7654530.postman.co/workspace/ce749f3a-dfb7-4201-87ac-145d423ed540/collection/48557853-ab9a77d7-568d-432a-8085-5845f2aacc54?action=share&source=collection_link&creator=48557853"
+	},
+	"item": [
+		{
+			"name": "POST APIs",
+			"item": [
+				{
+					"name": "Register User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Successful POST request\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"username\": \"demo1\",\n  \"password\": \"demo456\",\n  \"role\": \"USER\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Access-Control-Request-Method",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Access-Control-Request-Method",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"admin123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Purchase Sweet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/sweets/68cbffa8f05fe46f84cc1884/purchase",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sweets",
+								"68cbffa8f05fe46f84cc1884",
+								"purchase"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restock Sweets",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/sweets/68cbffa8f05fe46f84cc1884/restock?amount=7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sweets",
+								"68cbffa8f05fe46f84cc1884",
+								"restock"
+							],
+							"query": [
+								{
+									"key": "amount",
+									"value": "7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Sweet",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZW1vIiwicm9sZSI6IlJPTEVfVVNFUiIsImlhdCI6MTc1ODE4MDYyNCwiZXhwIjoxNzU4MTg0MjI0fQ.TQj8FdL80uo-jpcqat8ipWMS-KRG4QgT49LNydPNhoM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Access-Control-Request-Method",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Access-Control-Request-Method",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/E:/Varun Gaur/Documents/GitHub/Resources/samplePic1.jpg"
+								},
+								{
+									"key": "video",
+									"type": "file",
+									"src": "/E:/Varun Gaur/Documents/GitHub/Resources/sample2.mp4"
+								},
+								{
+									"key": "name",
+									"value": "Demo Ultra",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "Sample Ultra",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "75",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "20",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sweets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sweets"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "## 📡 API Endpoints\n\n### Auth\n\n- `POST /api/auth/register` → Register user; needs username, password and role. Make sure to set any one of two possible roles: \"ROLE_ADMIN\", or \"ROLE_USER\". NO OTHER ROLE VALUE WILL WORK!\n    \n- `POST /api/auth/login` → Login (returns JWT), needs username and password only\n    \n\n### Sweets\n\n- `POST /api/sweets` → Add new sweet (with optional photo/video upload). Required Entities to fill: Name, Category, Quantity, Amount\n    \n- `POST /api/sweets/{id}/purchase` → Purchase sweet. After calling the api, the quantity decrements by 1\n    \n- `POST /api/sweets/{id}/restock?amount=x` → Restock sweet by `x`"
+		},
+		{
+			"name": "GET APIs",
+			"item": [
+				{
+					"name": "Filtering Options",
+					"item": [
+						{
+							"name": "Get Sweets By Price Ranges",
+							"item": [
+								{
+									"name": "Both Min and Max",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/sweets/search?minPrice=20&maxPrice=30",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"sweets",
+												"search"
+											],
+											"query": [
+												{
+													"key": "minPrice",
+													"value": "20"
+												},
+												{
+													"key": "maxPrice",
+													"value": "30"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Min Only",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/sweets/search?minPrice=20",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"sweets",
+												"search"
+											],
+											"query": [
+												{
+													"key": "minPrice",
+													"value": "20"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Max Only",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8080/api/sweets/search?maxPrice=30",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8080",
+											"path": [
+												"api",
+												"sweets",
+												"search"
+											],
+											"query": [
+												{
+													"key": "maxPrice",
+													"value": "30"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"description": "## 📡 API Endpoints\n\n### Get Sweets By Price Ranges\n\n- `GET /api/sweets/search?minPrice=20&maxPrice=50 Searches when both minPrice and maxPrice property are set`\n    \n- `GET /api/sweets/search?minPrice=20 Searches when only minPrice property is applied, in this case fetches all sweets whose price is greater than 20`\n    \n- `GET /api/sweets/search?maxPrice=50 Searches when only maxPrice property is applied, in this case fetches all sweets whose price is less than 50`"
+						},
+						{
+							"name": "Get Sweets By Category",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/sweets/search?category=demo",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"sweets",
+										"search"
+									],
+									"query": [
+										{
+											"key": "category",
+											"value": "demo"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Sweets By Name",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/sweets/search?name=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"sweets",
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Hybrid",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8080/api/sweets/search?name=demo&minPrice=70",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"api",
+										"sweets",
+										"search"
+									],
+									"query": [
+										{
+											"key": "name",
+											"value": "demo"
+										},
+										{
+											"key": "minPrice",
+											"value": "70"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "## 📡 API Endpoints\n\n### Search\n\n- `GET /api/sweets/search?name=laddu Search By Name`\n    \n- `GET /api/sweets/search?category=mithai Search by Category`\n    \n- `GET /api/sweets/search?name=barfi&maxPrice=30 Hybrid Search`\n    \n\n### For Price Range Search By, look onto folder \"Get Sweets By Price Ranges\"\n\n[https://red-moon-7654530.postman.co/workspace/Varun-Gaur-(23)'s-Workspace~ce749f3a-dfb7-4201-87ac-145d423ed540/folder/48557853-47815aee-d91b-4903-9215-8d9b3fec5da7?action=share&amp;source=copy-link&amp;creator=48557853&amp;ctx=documentation](https://red-moon-7654530.postman.co/workspace/Varun-Gaur-(23)'s-Workspace~ce749f3a-dfb7-4201-87ac-145d423ed540/folder/48557853-47815aee-d91b-4903-9215-8d9b3fec5da7?action=share&source=copy-link&creator=48557853&ctx=documentation)\n\n## Note: Hybrid Filtering uses AND Operator, not OR operator, this note also applies to the search by properties \"minPrice\" and \"maxPrice\""
+				},
+				{
+					"name": "Get Sweets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/sweets",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sweets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Photo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/sweets/68cc2582b1b373b3113944e5/photo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sweets",
+								"68cc2582b1b373b3113944e5",
+								"photo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Video",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/sweets/68ccdd7778255498ef8e2e8c/video",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sweets",
+								"68ccdd7778255498ef8e2e8c",
+								"video"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "## 📡 API Endpoints\n\n### Sweets\n\n- `GET /api/sweets` → Get all sweets\n    \n- `GET /api/sweets/{id}/photo` → Get sweet photo\n    \n- `GET /api/sweets/{id}/video` → Get sweet video (.mp4)\n    \n\n### For FIltering Options, look onto folder \"Filtering Options\"\n\n[https://red-moon-7654530.postman.co/workspace/Varun-Gaur-(23)'s-Workspace~ce749f3a-dfb7-4201-87ac-145d423ed540/folder/48557853-d8701389-85f0-4c79-a817-0ff8dee7f77d?action=share&amp;source=copy-link&amp;creator=48557853&amp;ctx=documentation](https://red-moon-7654530.postman.co/workspace/Varun-Gaur-(23)'s-Workspace~ce749f3a-dfb7-4201-87ac-145d423ed540/folder/48557853-d8701389-85f0-4c79-a817-0ff8dee7f77d?action=share&source=copy-link&creator=48557853&ctx=documentation)"
+		},
+		{
+			"name": "PUT APIs",
+			"item": [
+				{
+					"name": "Update Sweets",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJST0xFX0FETUlOIiwiaWF0IjoxNzU4MjYwNzgzLCJleHAiOjE3NTgyNjQzODN9.graD9lUV0wI_vO47_OXQW0kvr69OzQGKDw8pcat72nk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/E:/Varun Gaur/Documents/GitHub/Resources/sujihalwa.jpeg"
+								},
+								{
+									"key": "video",
+									"type": "file",
+									"src": "/E:/Varun Gaur/Documents/GitHub/Resources/Gulab Jamun.mp4"
+								},
+								{
+									"key": "name",
+									"value": "Gulab Jamun Plus",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "Gulab Jamun Plus",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "90",
+									"type": "text"
+								},
+								{
+									"key": "quantity",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/sweets/68ccdd7778255498ef8e2e8c",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sweets",
+								"68ccdd7778255498ef8e2e8c"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "## 📡 API Endpoints\n\n### Sweets\n\n- `PUT /api/sweets/{id}` → Update sweet (supports photo/video update)"
+		},
+		{
+			"name": "DELETE APIs",
+			"item": [
+				{
+					"name": "Delete Sweet",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/sweets/68ccdd1962980a45468ade8d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"sweets",
+								"68ccdd1962980a45468ade8d"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "## 📡 API Endpoints\n\n### Sweets\n\n- `DELETE /api/sweets/{id}` → Delete sweet"
+		}
+	]
+}
