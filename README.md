@@ -191,8 +191,8 @@ To be honest, making this fantastic project, made by myself, couldn't be done in
 ## Screenshots
 
 
-I will make a complete different branch, there you should get dive in video, screenshots, video tutorial of setting up this project, and Postman API Collection, where all available and definition of created APIs shall be explained. 
-I will also send a link for the branch
+Following link is a complete different branch, there you should get dive in videos, screenshots, video tutorial of setting up this project, and Postman API Collection, where all available and definition of created APIs shall be explained. 
+https://github.com/varung18/tdd_kata/tree/guide
 I appreciate your understanding and thank you for any inconvenice caused
 
 
